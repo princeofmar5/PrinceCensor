@@ -1,3 +1,9 @@
 name: PrinceCensor
-main: com.github.princeofmar5.PCensorMain
+main: com.github.princeofmar5.PCensor
 version: 1.0
+commands:
+   testchat:
+      description: This is a demo command.
+      usage: /<command>
+      permission: <plugin name>.testchat
+      permission-message: You don't have <permission>

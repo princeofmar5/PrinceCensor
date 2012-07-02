@@ -11,6 +11,7 @@ public class PCensor extends JavaPlugin
 		getLogger().info("PrinceCensor enabled!");
 		myExecutor = new PCensorCommandExecutor(this);
 		getCommand("testchat").setExecutor(myExecutor);
+		new PCensorLoginListener(this);
 	}
 	
 	public void onDisable()

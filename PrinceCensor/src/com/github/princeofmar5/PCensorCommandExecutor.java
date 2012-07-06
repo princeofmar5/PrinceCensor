@@ -1,44 +1,72 @@
 package com.github.princeofmar5;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class PCensorCommandExecutor implements CommandExecutor 
 {
-	@SuppressWarnings("unused")
 	private PCensor plugin;
 	
-	public PCensorCommandExecutor(PCensor plugin) 
+	public PCensorCommandExecutor(PCensor instance) 
 	{
-		this.plugin = plugin;
+		plugin = instance;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) 
 	{
-		Player player = null;
-		if (sender instanceof Player) 
+		if (cmd.getName().equalsIgnoreCase("pc"))
 		{
-			player = (Player) sender;
-		}
-		
-		if (cmd.getName().equalsIgnoreCase("testchat"))
-		{
-			if (player == null)
-			{
-				sender.sendMessage("This command can only be run by a pleyer.");
-			} else if (args.length > 0)
+			if (args.length > 2)
 			{
 				sender.sendMessage(ChatColor.RED + "Too many arguments!");
 				return false;
+			} else if (args.length < 2)
+			{
+				sender.sendMessage(ChatColor.RED + "Not enough arguments!");
+				return false;
 			} else
 			{
-				player.chat("TACO!");
+				if (args[0].equals("add"))
+				{
+					if (sender.hasPermission("princecensor.add"))
+					{
+						List<String> words = plugin.getConfig().getStringList("words");
+						words.add(args[1]);
+						plugin.getConfig().set("words", words);
+						plugin.saveConfig();
+						sender.sendMessage(ChatColor.GREEN + "Word Added!");
+					} else
+					{
+						sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					}
+					return true;
+				} else if (args[0].equals("remove"))
+				{
+					if (sender.hasPermission("princecensor.remove"))
+					{
+						List<String> words = plugin.getConfig().getStringList("words");
+						if (words.contains(args[1]))
+						{
+							words.remove(args[1]);
+							plugin.getConfig().set("words", words);
+							plugin.saveConfig();
+							sender.sendMessage(ChatColor.GREEN + "Word Removed!");
+						} else
+						{
+							sender.sendMessage(ChatColor.RED + "Word Already Removed?");
+						}
+					} else
+					{
+						sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					}
+				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}

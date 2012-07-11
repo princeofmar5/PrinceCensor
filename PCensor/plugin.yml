@@ -1,20 +1,20 @@
-name: PrinceCensor
+name: PCensor
 main: com.github.princeofmar5.PCensor
 version: 1.0
 author: Princeofmar5
 commands:
-   pc:
+   pcensor:
       description: This adds words to censor
       usage: /<command> [arg] [word]
 permissions:
-    princecensor.*:
-        description: Gives access to all princecensor commands
+    pcensor.*:
+        description: Gives access to all pcensor commands
         children:
-            princecensor.add: true
-            princecensor.remove: true
-    princecensor.add:
+            pcensor.add: true
+            pcensor.remove: true
+    pcensor.add:
         description: Allows you to add "swear words"
         default: op
-    princecensor.remove:
+    pcensor.remove:
         description: Allows you to remove "swear words"
         default: op

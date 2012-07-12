@@ -19,7 +19,7 @@ public class PCensorCommandExecutor implements CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) 
 	{
-		if (cmd.getName().equalsIgnoreCase("pc"))
+		if (cmd.getName().equalsIgnoreCase("pcensor"))
 		{
 			if (args.length > 2)
 			{
@@ -33,13 +33,19 @@ public class PCensorCommandExecutor implements CommandExecutor
 			{
 				if (args[0].equals("add"))
 				{
-					if (sender.hasPermission("princecensor.add"))
+					if (sender.hasPermission("pcensor.add"))
 					{
 						List<String> words = plugin.getConfig().getStringList("words");
-						words.add(args[1]);
-						plugin.getConfig().set("words", words);
-						plugin.saveConfig();
-						sender.sendMessage(ChatColor.GREEN + "Word Added!");
+						if(!words.contains(args[1]))
+						{
+							words.add(args[1]);
+							plugin.getConfig().set("words", words);
+							plugin.saveConfig();
+							sender.sendMessage(ChatColor.GREEN + "Word Added!");
+						} else
+						{
+							sender.sendMessage(ChatColor.RED + "Word is already on the list!");
+						}
 					} else
 					{
 						sender.sendMessage(ChatColor.RED + "You don't have permission!");
@@ -47,7 +53,7 @@ public class PCensorCommandExecutor implements CommandExecutor
 					return true;
 				} else if (args[0].equals("remove"))
 				{
-					if (sender.hasPermission("princecensor.remove"))
+					if (sender.hasPermission("pcensor.remove"))
 					{
 						List<String> words = plugin.getConfig().getStringList("words");
 						if (words.contains(args[1]))
@@ -58,7 +64,7 @@ public class PCensorCommandExecutor implements CommandExecutor
 							sender.sendMessage(ChatColor.GREEN + "Word Removed!");
 						} else
 						{
-							sender.sendMessage(ChatColor.RED + "Word Already Removed?");
+							sender.sendMessage(ChatColor.RED + "Word isn't on the list!");
 						}
 					} else
 					{

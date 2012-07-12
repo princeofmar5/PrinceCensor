@@ -1,6 +1,6 @@
 name: PCensor
 main: com.github.princeofmar5.PCensor
-version: 1.0
+version: 1.0.1
 author: Princeofmar5
 commands:
    pcensor:

@@ -1,4 +1,4 @@
-PCensor V1.0
+PCensor V1.0.1
 
 This plugin censors all forms of words listed in the config.
 
@@ -19,3 +19,5 @@ Permissions:
 Version History:
 V1.0 Initial release
   - Includes a config, manually add and remove words, permissions
+V1.0.1 Bugfix
+  - Fixed bug where you couldn't use caps in the config for words

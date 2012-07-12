@@ -10,16 +10,16 @@ public class PCensor extends JavaPlugin
 	public void onEnable()
 	{
 		getConfig();
-		getLogger().info("PrinceCensor enabled!");
+		getLogger().info("PCensor enabled!");
 		myExecutor = new PCensorCommandExecutor(this);
-		getCommand("pc").setExecutor(myExecutor);
+		getCommand("pcensor").setExecutor(myExecutor);
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new PCensorChatListener(this), this);
 	}
 	
 	public void onDisable()
 	{
-		getLogger().info("PrinceCensor disabled!");
+		getLogger().info("PCensor disabled!");
 	}
 	
 	

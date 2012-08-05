@@ -7,11 +7,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class PCensorCommandExecutor implements CommandExecutor 
+public class PrinceCensorCommandExecutor implements CommandExecutor 
 {
-	private PCensor plugin;
+	private PrinceCensor plugin;
 	
-	public PCensorCommandExecutor(PCensor instance) 
+	public PrinceCensorCommandExecutor(PrinceCensor instance) 
 	{
 		plugin = instance;
 	}
@@ -71,6 +71,19 @@ public class PCensorCommandExecutor implements CommandExecutor
 						sender.sendMessage(ChatColor.RED + "You don't have permission!");
 					}
 				}
+				return true;
+			}
+		}
+		if (cmd.getName().equalsIgnoreCase("pcreload"))
+		{
+			if (args.length > 0)
+			{
+				sender.sendMessage(ChatColor.RED + "Too many arguments!");
+				return false;
+			} else
+			{
+				plugin.reloadConfig();
+				sender.sendMessage(ChatColor.GREEN + "Config Reloaded!");
 				return true;
 			}
 		}

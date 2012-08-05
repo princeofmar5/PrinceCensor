@@ -1,0 +1,27 @@
+name: PrinceCensor
+main: com.github.princeofmar5.PrinceCensor
+version: 1.1
+author: Princeofmar5
+commands:
+   pcensor:
+      description: This adds words to censor
+      usage: /<command> [arg] [word]
+   pcreload:
+      description: This command reloads the config
+      usage: /<command>
+permissions:
+    princecensor.*:
+        description: Gives access to all princecensor commands
+        children:
+            princecensor.add: true
+            princecensor.remove: true
+            princecensor.reload: true
+    princecensor.add:
+        description: Allows you to add "swear words"
+        default: op
+    princecensor.remove:
+        description: Allows you to remove "swear words"
+        default: op
+    princecensor.reload:
+        description: Allows you to reload the config
+        default: op
